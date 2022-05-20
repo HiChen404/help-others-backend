@@ -1,15 +1,40 @@
 const { _, collection } = require('./index')
 
-exports.read = async (params, context) => {
-  const { first, size, page } = params
-
+exports.read = async (
+  params = {
+    degree: '0',
+    range: '2',
+  },
+  context,
+) => {
+  const { first, size, range = '2', degree = '0', categories = '0' } = params
+  let query = {
+    create_at: _.gt(1053035748710),
+  }
+  //返回所有程度的
+  if (degree !== '0') {
+    query = {
+      ...query,
+      degree: _.eq(degree),
+    }
+  }
+  if (range !== '2') {
+    query = {
+      ...query,
+      audit_status: _.eq(range),
+    }
+  }
+  if (categories !== '0') {
+    query = {
+      ...query,
+      categories: _.eq(categories),
+    }
+  }
   return new Promise(async (resolve, reject) => {
     const res = await collection
-      .where({
-        create_at: _.gt(100000),
-      })
+      .where(query)
       .orderBy('create_at', 'desc')
-      .skip(Number(first))
+      .skip(Number(first) - 1)
       .limit(Number(size))
       .get()
       .catch(err => {

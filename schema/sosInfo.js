@@ -22,6 +22,7 @@ const degree = joi.string().length(1).equal('1', '2', '3').required()
 const phone = joi.string().length(11).required()
 const detail = joi.string().min(10).max(150).required()
 const username = joi.string().min(2).max(15).required()
+const categories = joi.string().length(1).equal('1', '2', '3', '4').required()
 
 exports.sosInfo_schema = joi.object({
   area,
@@ -29,4 +30,5 @@ exports.sosInfo_schema = joi.object({
   username,
   phone,
   detail,
+  categories,
 })
