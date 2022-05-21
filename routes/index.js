@@ -8,7 +8,6 @@ const { read } = require('../utils/database/read')
 const { remove } = require('../utils/database/delete')
 const { delete_schema } = require('../schema/delete')
 const { query_schema } = require('../schema/query')
-const { getCount } = require('../utils/database/getCount.js')
 
 /* GET home page. */
 router.post('/publish', validator.body(sosInfo_schema), async function (req, res, next) {
@@ -47,11 +46,10 @@ router.get('/data', validator.query(query_schema), async (req, res, next) => {
   if (error) {
     return next(createError(500, '服务器错误'))
   }
-  const { total } = await getCount()
 
   return res.send({
     code: 0,
-    data: { total: total, ...value },
+    data: value,
   })
 })
 

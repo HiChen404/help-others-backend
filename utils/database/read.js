@@ -1,4 +1,5 @@
 const { _, collection } = require('./index')
+const { getCount } = require('./getCount')
 
 exports.read = async (
   params = {
@@ -40,6 +41,12 @@ exports.read = async (
       .catch(err => {
         return reject(err)
       })
-    return resolve(res)
+    const { total } = await getCount(query).catch(err => {
+      return reject(err)
+    })
+    return resolve({
+      total,
+      ...res,
+    })
   })
 }

@@ -1,11 +1,13 @@
 const { _, collection } = require('./index')
 
-exports.getCount = async () => {
+exports.getCount = async query => {
   return new Promise(async (resolve, reject) => {
-    const res = await collection.count().catch(err => {
-      resolve(err)
-    })
-    console.log(res)
+    const res = await collection
+      .where(query)
+      .count()
+      .catch(err => {
+        resolve(err)
+      })
     resolve(res)
   })
 }
