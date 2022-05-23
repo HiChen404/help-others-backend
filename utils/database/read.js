@@ -1,14 +1,8 @@
 const { _, collection } = require('./index')
 const { getCount } = require('./getCount')
 
-exports.read = async (
-  params = {
-    degree: '0',
-    range: '2',
-  },
-  context,
-) => {
-  const { first, size, range = '2', degree = '0', categories = '0' } = params
+exports.read = async params => {
+  const { first, size, range = '2', degree = '0', categories = '0', area = '0' } = params
   let query = {
     create_at: _.gt(1053035748710),
   }
@@ -31,6 +25,13 @@ exports.read = async (
       categories: _.eq(categories),
     }
   }
+  if (area !== '0') {
+    query = {
+      ...query,
+      area: _.eq(area),
+    }
+  }
+
   return new Promise(async (resolve, reject) => {
     const res = await collection
       .where(query)

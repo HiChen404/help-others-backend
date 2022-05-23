@@ -39,8 +39,8 @@ router.post('/publish', validator.body(sosInfo_schema), async function (req, res
 
 router.get('/data', validator.query(query_schema), async (req, res, next) => {
   //分页信息
-  const { first, size, range, degree, categories } = req.query
-  const [value, error] = await read({ first, size, range, degree, categories })
+  const { first, size, range, degree, categories, area } = req.query
+  const [value, error] = await read({ first, size, range, degree, categories, area })
     .then(value => [value, null])
     .catch(err => [null, err])
   if (error) {
