@@ -8,6 +8,8 @@ const { read } = require('../utils/database/read')
 const { remove } = require('../utils/database/delete')
 const { delete_schema } = require('../schema/delete')
 const { query_schema } = require('../schema/query')
+const { audit_schema } = require('../schema/audit')
+const { audit_controller } = require('../utils/database/audit')
 
 /* GET home page. */
 router.post('/publish', validator.body(sosInfo_schema), async function (req, res, next) {
@@ -71,5 +73,20 @@ router.delete('/data', validator.query(delete_schema), async (req, res, next) =>
     msg: value,
   })
 })
-
+router.patch('/data', validator.query(audit_schema), async (req, res) => {
+  console.log(req.query)
+  const [value, err] = await audit_controller(req.query)
+    .then(res => [res, null])
+    .catch(err => [null, err])
+  if (err) {
+    return res.send({
+      code: '1',
+      msg: err,
+    })
+  }
+  res.send({
+    code: 0,
+    msg: '修改成功',
+  })
+})
 module.exports = router
