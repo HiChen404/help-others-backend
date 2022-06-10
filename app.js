@@ -6,11 +6,19 @@ const logger = require('morgan')
 const joi = require('joi')
 const cors = require('cors')
 const { create } = require('domain')
+const rateLimit = require('express-rate-limit')
+
 const sosRouter = require('./routes/sos')
 const virusDataRouter = require('./routes/virusData')
 
 const app = express()
 
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 限制時間
+  max: 100, // 限制請求數量
+  message: 'Too many requests, please try again later!',
+})
+app.use(limiter)
 // view engine setup
 app.use(cors())
 app.use(logger('dev'))

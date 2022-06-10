@@ -8,6 +8,7 @@ specifiers:
   dotenv: ^16.0.1
   express: ~4.16.1
   express-joi-validation: ^5.0.1
+  express-rate-limit: ^6.4.0
   http-errors: ~1.6.3
   jade: ~1.11.0
   joi: ^17.6.0
@@ -21,6 +22,7 @@ dependencies:
   dotenv: mirrors.tencent.com/dotenv/16.0.1
   express: mirrors.tencent.com/express/4.16.4
   express-joi-validation: 5.0.1_joi@17.6.0
+  express-rate-limit: 6.4.0_express@4.16.4
   http-errors: mirrors.tencent.com/http-errors/1.6.3
   jade: 1.11.0
   joi: 17.6.0
@@ -242,6 +244,15 @@ packages:
       joi: '17'
     dependencies:
       joi: 17.6.0
+    dev: false
+
+  /express-rate-limit/6.4.0_express@4.16.4:
+    resolution: {integrity: sha512-lxQRZI4gi3qAWTf0/Uqsyugsz57h8bd7QyllXBgJvd6DJKokzW7C5DTaNvwzvAQzwHGFaItybfYGhC8gpu0V2A==}
+    engines: {node: '>= 12.9.0'}
+    peerDependencies:
+      express: ^4 || ^5
+    dependencies:
+      express: mirrors.tencent.com/express/4.16.4
     dev: false
 
   /fresh/0.5.2:
