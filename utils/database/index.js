@@ -10,5 +10,6 @@ const app = cloudbase.init({
 const db = app.database()
 const _ = db.command
 const collection = db.collection('sos_info')
+const collection2 = db.collection('fetchData')
 
-module.exports = { _, collection }
+module.exports = { _, collection, collection2 }

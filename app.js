@@ -5,8 +5,9 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const joi = require('joi')
 const cors = require('cors')
-const indexRouter = require('./routes/index')
 const { create } = require('domain')
+const sosRouter = require('./routes/sos')
+const virusDataRouter = require('./routes/virusData')
 
 const app = express()
 
@@ -17,7 +18,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/api', indexRouter)
+app.use('/api', sosRouter)
+app.use('/data', virusDataRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
